@@ -12,18 +12,14 @@ var rollOne = new Map(mapKeysValues);
 var rollTwo = new Map(mapKeysValues);
 var rollThree = new Map(mapKeysValues);
 
-let wallet = 500;
-
+let wallet = parseInt(localStorage.wallet, 10);
+console.log(wallet);
 const bet = document.querySelectorAll("button.bet");
-//const buttons = document.getElementsByClassName("button.bet");
-
-//document.getElementById("bet").disabled = true;
-//buttons.disabled = "disabled";
-//const buttons = button.length;
 
 for (let i=0; i<bet.length; i++) {
     bet[i].addEventListener("click", function () {
       if(Perdu(wallet)) {
+        localStorage.clear();
         return false;
       } else{
 
@@ -90,3 +86,8 @@ function Perdu(sommes) {
 }
 
 
+
+
+alert("Votre solde est de : " + localStorage.wallet);
+
+//TODO: bloquer le refresh de la page ou réaffecter la valeur courante de calcul à la variable de sessionlocal.
