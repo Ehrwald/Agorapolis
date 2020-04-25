@@ -16,6 +16,8 @@ let wallet = parseInt(localStorage.wallet, 10);
 console.log(wallet);
 const bet = document.querySelectorAll("button.bet");
 
+refreshEverysec(5000);
+
 for (let i=0; i<bet.length; i++) {
     bet[i].addEventListener("click", function () {
 
@@ -98,9 +100,14 @@ function Perdu(sommes) {
   }
 }
 
+function refreshEverysec(sec) {
+  setInterval(function (){
+    window.location.reload();
+  }, sec)
+}
 
 
-
-alert("Votre solde est de : " + localStorage.wallet);
+//retiré après avoir écrire la valeur dans le dom
+//alert("Votre solde est de : " + localStorage.wallet);
 
 
