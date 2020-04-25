@@ -91,3 +91,4 @@ function Perdu(sommes) {
 alert("Votre solde est de : " + localStorage.wallet);
 
 //TODO: bloquer le refresh de la page ou réaffecter la valeur courante de calcul à la variable de sessionlocal.
+//TODO: fix bug : pourvoir cliquer sur le bouton de 50 alors que les fonds sont inférieurs à 30€
