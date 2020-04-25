@@ -34,6 +34,8 @@ for (let i=0; i<bet.length; i++) {
         let value3 = rollThree.get(getRandomInt(rollThree.size));
         let invested = bet[i].innerHTML;
 
+        //document.write(localStorage.wallet);
+        console.log("le solde de localStrorage : ", localStorage.wallet);
 
         console.log(value, " / ", value2, " / ", value3, "vous misez : ", invested,
           "Votre solde est de : ", wallet);
@@ -69,10 +71,14 @@ for (let i=0; i<bet.length; i++) {
         } else {
           wallet = wallet - parseInt(invested, 10);
           console.log("c'est perdu!", "& Votre solde est de : ", wallet);
+          localStorage.setItem("wallet", wallet.toString());
+          console.log("Après jeu : ", localStorage.wallet);
           return wallet;
         }
       }
     }
+      localStorage.setItem("wallet", wallet.toString());
+      console.log("Après jeu : ", localStorage.wallet);
     });
 
 }
@@ -97,5 +103,4 @@ function Perdu(sommes) {
 
 alert("Votre solde est de : " + localStorage.wallet);
 
-//TODO: bloquer le refresh de la page ou réaffecter la valeur courante de calcul à la variable de sessionlocal.
 
