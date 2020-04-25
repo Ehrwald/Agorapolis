@@ -18,10 +18,16 @@ const bet = document.querySelectorAll("button.bet");
 
 for (let i=0; i<bet.length; i++) {
     bet[i].addEventListener("click", function () {
-      if(Perdu(wallet)) {
+
+    if(parseInt(bet[i].innerHTML, 10) > wallet){
+
+      alert("vous n'avez pas assez de crédit");
+      return false;
+    } else {
+      if (Perdu(wallet)) {
         localStorage.clear();
         return false;
-      } else{
+      } else {
 
         let value = rollOne.get(getRandomInt(rollOne.size));
         let value2 = rollTwo.get(getRandomInt(rollTwo.size));
@@ -66,6 +72,7 @@ for (let i=0; i<bet.length; i++) {
           return wallet;
         }
       }
+    }
     });
 
 }
@@ -91,4 +98,4 @@ function Perdu(sommes) {
 alert("Votre solde est de : " + localStorage.wallet);
 
 //TODO: bloquer le refresh de la page ou réaffecter la valeur courante de calcul à la variable de sessionlocal.
-//TODO: fix bug : pourvoir cliquer sur le bouton de 50 alors que les fonds sont inférieurs à 30€
+
