@@ -7,20 +7,33 @@ var mapKeysValues = [ [0, "Double Bar"], [1, "Double Bar"], [2, "Double Bar"], [
   [29, "Triple Bar"], [30, "Triple Bar"], [31, "Double Bar"], [32, "Double Bar"], [33, "Double Bar"],
   [34, "Bell"]
 ];
+var arrayImages = [ 'img/1_singlebar_1.png','img/2_bell_1.png', 'img/3_doublebar_1.png',
+  'img/4_seven_1.png','img/5_triplebar_1.png','img/6_bell_2.png',
+  'img/7_doublebar_2.png','img/8_seven_2.png','img/9_triplebar_2.png',
+  'img/10_singlebar_2.png'];
+
 
 var rollOne = new Map(mapKeysValues);
 var rollTwo = new Map(mapKeysValues);
 var rollThree = new Map(mapKeysValues);
 
+let iterator = imageIterator(0);
+
 let wallet = parseInt(localStorage.wallet, 10);
 console.log(wallet);
 const bet = document.querySelectorAll("button.bet");
 
-refreshEverysec(5000);
+
+
+changeImg(arrayImages, "rollTwo");
+changeImg(arrayImages, "rollOne");
+changeImg(arrayImages, "rollThree");
+
+
+//refreshEverysec(5000);
 
 for (let i=0; i<bet.length; i++) {
     bet[i].addEventListener("click", function () {
-
     if(parseInt(bet[i].innerHTML, 10) > wallet){
 
       alert("vous n'avez pas assez de crédit");
@@ -106,7 +119,48 @@ function refreshEverysec(sec) {
   }, sec)
 }
 
+// function createImage(array, roll) {
+//   for(let i =0; i < array.length;) {
+//     setInterval(() => {
+//       $("#" + roll + "").attr("src", array[i]);
+//       console.log(array[i]);
+//
+//     }, 500);
+//     i++;
+//     //$("#" + roll + "").attr("src", array[i]);
+//   }
+// }
 
+
+function* imageIterator(idx) {
+  while (idx < arrayImages.length)
+    yield idx++;
+  iterator = imageIterator(1);
+  yield 0;
+}
+
+function changeImg(array, roll) {
+  setInterval(() => {
+  $("#" + roll + "").attr("src", array[iterator.next().value]);
+  //console.log(array[iterator.next().value]);
+}, 250);
+}
+
+
+
+// function createImage(array, roll) {
+//   for(let i =0; i < array.length;) {
+//     setInterval(() => {
+//       $("#" + roll + "").attr("src", array[i]);
+//       console.log(array[i]);
+//
+//     }, 500);
+//     i++;
+//     //$("#" + roll + "").attr("src", array[i]);
+//   }
+// }
+
+//TODO: remplacer la fonction refresh par un bouton 'restart' qui refresh la page.
 //retiré après avoir écrire la valeur dans le dom
 //alert("Votre solde est de : " + localStorage.wallet);
 
