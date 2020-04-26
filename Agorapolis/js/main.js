@@ -23,11 +23,10 @@ let wallet = parseInt(localStorage.wallet, 10);
 console.log(wallet);
 const bet = document.querySelectorAll("button.bet");
 
-
-
-changeImg(arrayImages, "rollTwo");
-changeImg(arrayImages, "rollOne");
-changeImg(arrayImages, "rollThree");
+//
+// changeImg(arrayImages, "rollOne");
+// changeImg(arrayImages, "rollTwo");
+// changeImg(arrayImages, "rollThree");
 
 
 //refreshEverysec(5000);
@@ -44,11 +43,16 @@ for (let i=0; i<bet.length; i++) {
         return false;
       } else {
 
+        changeImg(arrayImages, "rollOne");
+        changeImg(arrayImages, "rollTwo");
+        changeImg(arrayImages, "rollThree");
+
         let value = rollOne.get(getRandomInt(rollOne.size));
         let value2 = rollTwo.get(getRandomInt(rollTwo.size));
         let value3 = rollThree.get(getRandomInt(rollThree.size));
         let invested = bet[i].innerHTML;
 
+        console.log(setImages(value));
         //document.write(localStorage.wallet);
         console.log("le solde de localStrorage : ", localStorage.wallet);
 
@@ -119,18 +123,6 @@ function refreshEverysec(sec) {
   }, sec)
 }
 
-// function createImage(array, roll) {
-//   for(let i =0; i < array.length;) {
-//     setInterval(() => {
-//       $("#" + roll + "").attr("src", array[i]);
-//       console.log(array[i]);
-//
-//     }, 500);
-//     i++;
-//     //$("#" + roll + "").attr("src", array[i]);
-//   }
-// }
-
 
 function* imageIterator(idx) {
   while (idx < arrayImages.length)
@@ -142,23 +134,14 @@ function* imageIterator(idx) {
 function changeImg(array, roll) {
   setInterval(() => {
   $("#" + roll + "").attr("src", array[iterator.next().value]);
-  //console.log(array[iterator.next().value]);
 }, 250);
 }
 
-
-
-// function createImage(array, roll) {
-//   for(let i =0; i < array.length;) {
-//     setInterval(() => {
-//       $("#" + roll + "").attr("src", array[i]);
-//       console.log(array[i]);
-//
-//     }, 500);
-//     i++;
-//     //$("#" + roll + "").attr("src", array[i]);
-//   }
-// }
+function setImages(value) {
+  $("#rollOne").attr("src", value);
+  $("#rollTwo").attr("src", value);
+  $("#rollThree").attr("src", value);
+}
 
 //TODO: remplacer la fonction refresh par un bouton 'restart' qui refresh la page.
 //retiré après avoir écrire la valeur dans le dom
