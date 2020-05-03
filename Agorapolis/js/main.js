@@ -20,8 +20,10 @@ var rollThree = new Map(mapKeysValues);
 let iterator = imageIterator(0);
 
 let wallet = parseInt(localStorage.wallet, 10);
+
 console.log(wallet);
 const bet = document.querySelectorAll("button.bet");
+
 
 //
 // changeImg(arrayImages, "rollOne");
@@ -52,7 +54,7 @@ for (let i=0; i<bet.length; i++) {
         //   console.error(error)
         // })
 
-
+        document.querySelector("#result").innerHTML = `Votre argent : ${wallet}`;
         let value = rollOne.get(getRandomInt(rollOne.size));
         let value2 = rollTwo.get(getRandomInt(rollTwo.size));
         let value3 = rollThree.get(getRandomInt(rollThree.size));
@@ -82,30 +84,40 @@ for (let i=0; i<bet.length; i++) {
           switch (value) {
             case 'Single Bar':
               console.log("c'est single bar");
+              document.querySelector("#winorlose").innerHTML = `
+              Votre argent : ${calcul(invested, 5)} €`;
               console.log(calcul(invested, 5), "€");
               wallet += calcul(invested, 5);
               setImages('img/1_singlebar_1.png');
               break;
             case 'Double Bar':
               console.log("c'est Double bar");
+              document.querySelector("#winorlose").innerHTML = `
+              Votre argent : ${calcul(invested, 10)} €`;
               console.log(calcul(invested, 10), "€");
               wallet += calcul(invested, 10);
               setImages('img/3_doublebar_1.png');
               break;
             case 'Triple Bar':
               console.log("c'est Triple bar");
+              document.querySelector("#winorlose").innerHTML = `
+              Votre argent : ${calcul(invested, 50)} €`;
               console.log(calcul(invested, 50), "€");
               wallet += calcul(invested, 50);
               setImages('img/5_triplebar_1.png');
               break;
             case 'Bell':
               console.log("c'est Bell");
+              document.querySelector("#winorlose").innerHTML = `
+              Votre argent : ${calcul(invested, 500)} €`;
               console.log(calcul(invested, 500), "€");
               wallet += calcul(invested, 500);
               setImages('img/2_bell_1.png');
               break;
             case 'Seven':
               console.log("c'est Seven");
+              document.querySelector("#winorlose").innerHTML = `
+              Votre argent : ${calcul(invested, 10000)} €`;
               console.log(calcul(invested, 10000), "€");
               wallet += calcul(invested, 10000);
               setImages('img/4_seven_1.png');
@@ -113,6 +125,8 @@ for (let i=0; i<bet.length; i++) {
           }
         } else {
           wallet = wallet - parseInt(invested, 10);
+          document.querySelector("#winorlose").innerHTML = `
+              Vous avez perdu : ${parseInt(invested, 10)} €`;
           console.log("c'est perdu!", "& Votre solde est de : ", wallet);
           localStorage.setItem("wallet", wallet.toString());
           console.log("Après jeu : ", localStorage.wallet);
