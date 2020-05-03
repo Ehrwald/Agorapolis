@@ -43,18 +43,37 @@ for (let i=0; i<bet.length; i++) {
         return false;
       } else {
 
-        changeImg(arrayImages, "rollOne");
-        changeImg(arrayImages, "rollTwo");
-        changeImg(arrayImages, "rollThree");
+         changeImg(arrayImages, "rollOne");
+         changeImg(arrayImages, "rollTwo");
+         changeImg(arrayImages, "rollThree");
+
+        // const interval = ms => new Promise(resolve => setTimeout(resolve, ms));
+        // interval(250).then(() => changeImg(arrayImages, "rollOne")).catch(function (error) {
+        //   console.error(error)
+        // })
+
 
         let value = rollOne.get(getRandomInt(rollOne.size));
         let value2 = rollTwo.get(getRandomInt(rollTwo.size));
         let value3 = rollThree.get(getRandomInt(rollThree.size));
         let invested = bet[i].innerHTML;
 
-        console.log(setImages(value));
+        //changeImg(arrayImages, "rollOne", true);
+
+
+
+
         //document.write(localStorage.wallet);
         console.log("le solde de localStrorage : ", localStorage.wallet);
+
+        // changeImg(arrayImages, "rollOne", setTimeout(function () {
+        //     return true;
+        // }, 2000));
+
+        // changeImg(arrayImages, "rollTwo", true);
+        // changeImg(arrayImages, "rollThree", true);
+
+        //$("#rollOne").attr("src", "img/7_doublebar_2.png");
 
         console.log(value, " / ", value2, " / ", value3, "vous misez : ", invested,
           "Votre solde est de : ", wallet);
@@ -65,26 +84,31 @@ for (let i=0; i<bet.length; i++) {
               console.log("c'est single bar");
               console.log(calcul(invested, 5), "€");
               wallet += calcul(invested, 5);
+              setImages('img/1_singlebar_1.png');
               break;
             case 'Double Bar':
               console.log("c'est Double bar");
               console.log(calcul(invested, 10), "€");
               wallet += calcul(invested, 10);
+              setImages('img/3_doublebar_1.png');
               break;
             case 'Triple Bar':
               console.log("c'est Triple bar");
               console.log(calcul(invested, 50), "€");
               wallet += calcul(invested, 50);
+              setImages('img/5_triplebar_1.png');
               break;
             case 'Bell':
               console.log("c'est Bell");
               console.log(calcul(invested, 500), "€");
               wallet += calcul(invested, 500);
+              setImages('img/2_bell_1.png');
               break;
             case 'Seven':
               console.log("c'est Seven");
               console.log(calcul(invested, 10000), "€");
               wallet += calcul(invested, 10000);
+              setImages('img/4_seven_1.png');
               break;
           }
         } else {
@@ -96,6 +120,7 @@ for (let i=0; i<bet.length; i++) {
         }
       }
     }
+      console.log(value);
       localStorage.setItem("wallet", wallet.toString());
       console.log("Après jeu : ", localStorage.wallet);
     });
@@ -131,11 +156,22 @@ function* imageIterator(idx) {
   yield 0;
 }
 
+
 function changeImg(array, roll) {
-  setInterval(() => {
-  $("#" + roll + "").attr("src", array[iterator.next().value]);
-}, 250);
+
+    $("#" + roll + "").attr("src", array[iterator.next().value]);
+
 }
+
+
+
+// function changeImg(array, roll) {
+//
+//     setInterval(() => {
+//       $("#" + roll + "").attr("src", array[iterator.next().value]);
+//
+//     }, 250);
+// }
 
 function setImages(value) {
   $("#rollOne").attr("src", value);
